@@ -1,2 +1,4 @@
 # UoM-Yr_3_Individual_Project
-Repository for UoM Year 3 Individual Project Simulation
+This is a repository for UoM Year 3 Individual Project
+Where you can find files for MATLAB and Simulink simulation.
+
