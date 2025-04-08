@@ -41,7 +41,7 @@ for i = 1:length(change_indices_d)
     end
 end
 
-fprintf('Mean response time (D-axis): %.2f ms\n', mean(response_times_d) * 1000);
+fprintf('Mean response time: %.2f ms\n', mean(response_times_d) * 1000);
 
 %% 3. Total harmonic distortion
 thd_window = (time_thd > 0.25) & (time_thd < 0.55);
