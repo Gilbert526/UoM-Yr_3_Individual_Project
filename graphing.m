@@ -1,22 +1,30 @@
+%%%%%%%%%%%%%%%%%%% Power & Current Plot Generator for Grid-tied Inverter Simulation %%%%%%%%%%%%%%%%%%%
+%% To be ran after the model "GridTiedInverterNew.slx" has successfully outputted results.
+%
+%% Created by Geping Wang 11053446
+%
+%% Description: This script plots the Power and Current graphs used in the report
+%  The creation of part of this script involved the use of generative AI tools including ChatGPT and Deepseek.
+
 %% Data Extration
 % Power
-time_pq = out.PQ.time;
-pq_system_d = out.PQ.signals(1).values(:,1);
-pq_system_q = out.PQ.signals(1).values(:,2);
-pq_target_d = out.PQ.signals(2).values(:,1);
-pq_target_q = out.PQ.signals(2).values(:,2);
+time_pq = out.PQ.time;                          % Time axis of PQ
+pq_system_d = out.PQ.signals(1).values(:,1);    % Output Active Power
+pq_system_q = out.PQ.signals(1).values(:,2);    % Output Reactive Power
+pq_target_d = out.PQ.signals(2).values(:,1);    % Target Active Power
+pq_target_q = out.PQ.signals(2).values(:,2);    % Target Reactive Power
 
 % Current
-time_idq = out.Idq.time;
-idq_system_d = out.Idq.signals(1).values(:,1);
-idq_system_q = out.Idq.signals(1).values(:,2);
-idq_target_d = out.Idq.signals(2).values(:,1);
-idq_target_q = out.Idq.signals(2).values(:,2);
+time_idq = out.Idq.time;                        % Time axis of current
+idq_system_d = out.Idq.signals(1).values(:,1);  % Output Current on d axis
+idq_system_q = out.Idq.signals(1).values(:,2);  % Output Current on q axis
+idq_target_d = out.Idq.signals(2).values(:,1);  % Target Current on d axis
+idq_target_q = out.Idq.signals(2).values(:,2);  % Target Current on q axis
 
 % Target Power
-time_target = out.PQ_Target.time;
-target_d = out.PQ_Target.signals(1).values(:,1);
-target_q = out.PQ_Target.signals(1).values(:,2);
+time_target = out.PQ_Target.time;                   % Time axis of target
+target_d = out.PQ_Target.signals(1).values(:,1);    % Target Active Power
+target_q = out.PQ_Target.signals(1).values(:,2);    % Target Reactive Power
 
 
 %% Image Generation

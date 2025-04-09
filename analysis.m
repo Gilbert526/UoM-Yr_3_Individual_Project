@@ -1,3 +1,11 @@
+%%%%%%%%%%%%%%%%%%% Quantitative Analysis for Grid-tied Inverter Simulation %%%%%%%%%%%%%%%%%%%
+%% To be ran after the model "GridTiedInverterNew.slx" has successfully outputted results.
+%
+%% Created by Geping Wang 11053446
+%
+%% Description: This script calculates the response time, steady-state error and total harmonic distortion figures used in the final report.
+%  The creation of part of this script involved the use of generative AI tools including ChatGPT and Deepseek.
+
 %% Extract data
 time_pq = out.PQ.time;
 pq_system_d = out.PQ.signals(1).values(:,1);

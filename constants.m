@@ -1,4 +1,10 @@
-%%%%%%%%%%%%%%%%%%% Constants %%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%% Model Parameters for Grid-tied Inverter Simulation %%%%%%%%%%%%%%%%%%%
+%% To be placed with "GridTiedInverterNew.slx" and "S_target_0.mat" in the same folder to function.
+%
+%% Created by Geping Wang 11053446
+%
+%% Description: This script stores all the simulation parameters for the model
+
 %% Grid
 V_grid = 230 * 4;
 f_grid = 50;
@@ -38,14 +44,17 @@ Kp_ = 7000;
 Ki_ = 10;
 
 % LQR
+% RL Filter
 A = [-R_t / L_t, w_grid; -w_grid, -R_t / L_t];
 B = [1 / L_t, 0; 0, 1 / L_t];
 C = eye(2);
 D = 0;
 
+% PWM Time Delay
 A_pwm = [-1 / T_p, 0; 0, -1 / T_p];
 B_pwm = [K_cm / T_p, 0; 0, K_cm / T_p];
 
+% RL + PWM
 A_pwm_aug = [-R_t / L_t, w_grid, 1 / L_t , 0; -w_grid, -R_t / L_t, 0, 1 / L_t; 0, 0, -1 / T_p, 0; 0, 0, 0, -1 / T_p];
 B_pwm_aug = [-1 / L_t, 0; 0, -1 / L_t; K_cm / T_p, 0; 0, K_cm / T_p];
 C_pwm_aug = [0, 0, 1, 0; 0, 0, 0, 1];
@@ -59,11 +68,12 @@ R = 0.0001;
 K_lqr = lqr(sys, Q_lqr, R);
 
 % LQI
-A_aug = [A_pwm_aug, zeros(4, 2); C_pwm_aug, zeros(2, 2)];
-B_aug = [B_pwm_aug; zeros(2, 2)];
-C_aug = [C, zeros(2,4)];
-D_aug = 0;
-sys_aug = ss(A_aug, B_aug, C_aug, D_aug);
+%A_aug = [A_pwm_aug, zeros(4, 2); C_pwm_aug, zeros(2, 2)];
+%B_aug = [B_pwm_aug; zeros(2, 2)];
+%C_aug = [C, zeros(2,4)];
+%D_aug = 0;
+
+%sys_aug = ss(A_aug, B_aug, C_aug, D_aug);
 
 Q_lqi = diag([3950, 3950, 0.00001, 0.00001, 100, 100]);
 
@@ -71,11 +81,12 @@ K_lqi = lqi(sys, Q_lqi, R);
 
 %% Stability Test
 %syms lambda
-%char_poly = det(A_aug - lambda * eye(6)); % Compute determinant
-%simplified_poly = simplify(char_poly) % Simplify the polynomial
-%expanded_poly = expand(simplified_poly)
+%char_poly = det(A_aug - lambda * eye(6));  % Compute determinant
+%simplified_poly = simplify(char_poly)      % Simplify the polynomial
+%expanded_poly = expand(simplified_poly)    % Expand polynomial
 %pretty(expanded_poly)
-%eigenvalues = solve(simplified_poly == 0, lambda)
+%eigenvalues = solve(simplified_poly == 0, lambda)  % Solve polynomial by
+%finding eigenvalues
 
 %% Simulation
 f_sample = 100000;

@@ -1,3 +1,11 @@
+%%%%%%%%%%%%%%%%%%% Frequency Plot Generator for Grid-tied Inverter Simulation %%%%%%%%%%%%%%%%%%%
+%% To be ran after the model "GridTiedInverterNew.slx" has successfully outputted results.
+%
+%% Created by Geping Wang 11053446
+%
+%% Description: This script plots the Frequency analysis graphs used in the report
+%  The creation of part of this script involved the use of generative AI tools including ChatGPT and Deepseek.
+
 %% Data Extration
 time_i = out.Iout.time;
 i_out_a = out.Iout.signals(1).values(:,1);
